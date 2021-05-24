@@ -3,8 +3,8 @@
 namespace Runroom\GildedRose\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Runroom\GildedRose\factory\ItemFactory;
 use Runroom\GildedRose\GildedRose;
-use Runroom\GildedRose\model\Item;
 
 class GildedRoseTest extends TestCase
 {
@@ -13,7 +13,7 @@ class GildedRoseTest extends TestCase
      */
     public function itemsDegradeQuality(): void
     {
-        $items = [new Item('', 1, 5)];
+        $items = [ItemFactory::build('', 1, 5)];
 
         $gilded_rose = new GildedRose($items);
         $gilded_rose->update_quality();
@@ -26,7 +26,7 @@ class GildedRoseTest extends TestCase
      */
     public function itemsDegradeDoubleQualityOnceTheSellInDateHasPass(): void
     {
-        $items = [new Item('', -1, 5)];
+        $items = [ItemFactory::build('', -1, 5)];
 
         $gilded_rose = new GildedRose($items);
         $gilded_rose->update_quality();
@@ -39,7 +39,7 @@ class GildedRoseTest extends TestCase
      */
     public function itemsCannotHaveNegativeQuality(): void
     {
-        $items = [new Item('', 0, 0)];
+        $items = [ItemFactory::build('', 0, 0)];
 
         $gilded_rose = new GildedRose($items);
         $gilded_rose->update_quality();
@@ -52,7 +52,7 @@ class GildedRoseTest extends TestCase
      */
     public function agedBrieIncreasesQualityOverTime(): void
     {
-        $items = [new Item('Aged Brie', 0, 5)];
+        $items = [ItemFactory::build('Aged Brie', 0, 5)];
 
         $gilded_rose = new GildedRose($items);
         $gilded_rose->update_quality();
@@ -65,7 +65,7 @@ class GildedRoseTest extends TestCase
      */
     public function qualityCannotBeGreaterThan50(): void
     {
-        $items = [new Item('Aged Brie', 0, 50)];
+        $items = [ItemFactory::build('Aged Brie', 0, 50)];
 
         $gilded_rose = new GildedRose($items);
         $gilded_rose->update_quality();
@@ -78,7 +78,7 @@ class GildedRoseTest extends TestCase
      */
     public function sulfurasDoesNotChange(): void
     {
-        $items = [new Item('Sulfuras, Hand of Ragnaros', 10, 10)];
+        $items = [ItemFactory::build('Sulfuras, Hand of Ragnaros', 10, 10)];
 
         $gilded_rose = new GildedRose($items);
         $gilded_rose->update_quality();
@@ -106,7 +106,7 @@ class GildedRoseTest extends TestCase
      */
     public function backstageQualityIncreaseOverTimeWithCertainRules(int $sellIn, int $quality, int $expected): void
     {
-        $items = [new Item('Backstage passes to a TAFKAL80ETC concert', $sellIn, $quality)];
+        $items = [ItemFactory::build('Backstage passes to a TAFKAL80ETC concert', $sellIn, $quality)];
 
         $gilded_rose = new GildedRose($items);
         $gilded_rose->update_quality();

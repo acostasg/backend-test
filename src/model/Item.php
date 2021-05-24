@@ -4,25 +4,24 @@ namespace Runroom\GildedRose\model;
 
 class Item {
 
-    const MAX_QUALITY = 50;
-    const MIN_QUALITY = 0;
     const MAX_SELL_IN = 11;
     const MIDDLE_SELL_IN = 6;
+    const MIN_SELL_IN = 0;
 
     /** @var string  */
     private string $name;
     /** @var int  */
     private int $sellIn;
-    /** @var int  */
-    private int $quality;
+    /** @var Quality  */
+    private Quality $quality;
 
     /**
      * Item constructor.
      * @param string $name
      * @param int $sell_in
-     * @param int $quality
+     * @param Quality $quality
      */
-    function __construct(string $name, int $sell_in, int $quality) {
+function __construct(string $name, int $sell_in, Quality $quality) {
         $this->name = $name;
         $this->sellIn = $sell_in;
         $this->quality = $quality;
@@ -66,22 +65,55 @@ class Item {
      */
     public function getQuality(): int
     {
-        return $this->quality;
+        return $this->quality->toInt();
+    }
+
+    public function qualityIncrase(): void
+    {
+        $this->quality->increase(1);
+    }
+
+    public function qualityDecrease(): void
+    {
+        $this->quality->decrease(1);
+    }
+
+
+    public function setQualityToMin(): void
+    {
+        $this->quality->setToMin();
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function isQualityMajorByMinValue(): bool
+    {
+        return $this->quality->isMajorByMinValue();
     }
 
     /**
-     * @param int $quality
+     * @return bool
      */
-    public function setQuality(int $quality): void
+    public function isQualityMinorByMinValue(): bool
     {
-        $this->quality = $quality;
+        return $this->quality->isMinorByMinValue();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isQualityMinorByMaxValue(): bool
+    {
+        return $this->quality->isMinorByMaxValue();
     }
 
     /**
      * @return string
      */
     public function __toString(): string {
-        return "{$this->name}, {$this->sellIn}, {$this->quality}";
+        return "{$this->name}, {$this->sellIn}, {$this->quality->toInt()}";
     }
 
 }
