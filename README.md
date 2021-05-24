@@ -1,3 +1,26 @@
+# Docker
+Add docker for execute PHPUnit, PHPStan, Psalm and PHP-cs-fixer in development time
+```
+docker-compose up
+```
+for execute PHPUnit
+```
+docker exec -ti backend-test_php_1 php vendor/bin/phpunit
+```
+execute PHPStan
+```
+docker exec -ti backend-test_php_1 php vendor/bin/phpstan
+```
+execute Psalm
+```
+docker exec -ti backend-test_php_1 php vendor/bin/psalm --show-info=true
+```
+execute PHP-cs-fixer
+```
+docker exec -ti backend-test_php_1 php vendor/bin/php-cs-fixer fix src
+```
+__
+
 # Backend Developer Test
 
 ## Objetivo
