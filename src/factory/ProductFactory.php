@@ -18,6 +18,7 @@ class ProductFactory
 
     public static function build(string $name, int $days, int $quality): Product
     {
+        /** TODO move to register in container for inversion of control */
         switch ($name) {
             case self::AGED_BRIE:
                 $nameClass = AgedBrigeProduct::class;
