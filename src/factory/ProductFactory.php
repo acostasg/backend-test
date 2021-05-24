@@ -4,7 +4,7 @@
 namespace Runroom\GildedRose\factory;
 
 use Runroom\GildedRose\model\Product;
-use Runroom\GildedRose\model\products\AgedBrigeProduct;
+use Runroom\GildedRose\model\products\AgedBrieProduct;
 use Runroom\GildedRose\model\products\BackstagePassProduct;
 use Runroom\GildedRose\model\products\SulfurasProduct;
 use Runroom\GildedRose\model\Quality;
@@ -21,7 +21,7 @@ class ProductFactory
         /** TODO move to register in container for inversion of control */
         switch ($name) {
             case self::AGED_BRIE:
-                $nameClass = AgedBrigeProduct::class;
+                $nameClass = AgedBrieProduct::class;
                 break;
             case self::BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT:
                 $nameClass = BackstagePassProduct::class;

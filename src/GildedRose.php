@@ -4,7 +4,6 @@ namespace Runroom\GildedRose;
 
 use Runroom\GildedRose\command\ProductUpdateUseCase;
 use Runroom\GildedRose\model\collection\ProductCollection;
-use Runroom\GildedRose\model\Product;
 
 class GildedRose
 {
@@ -22,7 +21,6 @@ class GildedRose
 
     public function updateQuality(): void
     {
-        /** @var Product $item */
         foreach ($this->items as $item) {
             (new ProductUpdateUseCase($item))->execute();
         }

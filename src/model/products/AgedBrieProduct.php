@@ -5,7 +5,7 @@ namespace Runroom\GildedRose\model\products;
 
 use Runroom\GildedRose\model\Product;
 
-class AgedBrigeProduct extends Product
+class AgedBrieProduct extends Product
 {
     public function update(): void
     {

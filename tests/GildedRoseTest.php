@@ -53,7 +53,7 @@ class GildedRoseTest extends TestCase
      */
     public function agedBrieIncreasesQualityOverTime(): void
     {
-        $items = new ProductCollection([ProductFactory::build('Aged Brie', 0, 5)]);
+        $items = new ProductCollection([ProductFactory::build(ProductFactory::AGED_BRIE, 0, 5)]);
 
         $gilded_rose = new GildedRose($items);
         $gilded_rose->updateQuality();
@@ -66,7 +66,7 @@ class GildedRoseTest extends TestCase
      */
     public function qualityCannotBeGreaterThan50(): void
     {
-        $items = new ProductCollection([ProductFactory::build('Aged Brie', 0, 50)]);
+        $items = new ProductCollection([ProductFactory::build(ProductFactory::AGED_BRIE, 0, 50)]);
 
         $gilded_rose = new GildedRose($items);
         $gilded_rose->updateQuality();
@@ -79,7 +79,7 @@ class GildedRoseTest extends TestCase
      */
     public function sulfurasDoesNotChange(): void
     {
-        $items = new ProductCollection([ProductFactory::build('Sulfuras, Hand of Ragnaros', 10, 10)]);
+        $items = new ProductCollection([ProductFactory::build(ProductFactory::SULFURAS_HAND_OF_RAGNAROS, 10, 10)]);
 
         $gilded_rose = new GildedRose($items);
         $gilded_rose->updateQuality();
@@ -110,7 +110,7 @@ class GildedRoseTest extends TestCase
      */
     public function backstageQualityIncreaseOverTimeWithCertainRules(int $sellIn, int $quality, int $expected): void
     {
-        $items = new ProductCollection([ProductFactory::build('Backstage passes to a TAFKAL80ETC concert', $sellIn, $quality)]);
+        $items = new ProductCollection([ProductFactory::build(ProductFactory::BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, $sellIn, $quality)]);
 
         $gilded_rose = new GildedRose($items);
         $gilded_rose->updateQuality();
