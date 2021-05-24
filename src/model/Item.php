@@ -4,6 +4,11 @@ namespace Runroom\GildedRose\model;
 
 class Item {
 
+    const MAX_QUALITY = 50;
+    const MIN_QUALITY = 0;
+    const MAX_SELL_IN = 11;
+    const MIDDLE_SELL_IN = 6;
+
     /** @var string  */
     private string $name;
     /** @var int  */
