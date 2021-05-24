@@ -2,31 +2,28 @@
 
 namespace Runroom\GildedRose\model;
 
-class Item {
+class Item
+{
 
-    const MAX_SELL_IN = 11;
-    const MIDDLE_SELL_IN = 6;
-    const MIN_SELL_IN = 0;
-
-    /** @var string  */
+    /** @var string */
     private string $name;
-    /** @var int  */
-    private int $sellIn;
+    /** @var SellIn  */
+    private SellIn $sellIn;
     /** @var Quality  */
     private Quality $quality;
 
     /**
      * Item constructor.
      * @param string $name
-     * @param int $sell_in
+     * @param SellIn $sellIn
      * @param Quality $quality
      */
-function __construct(string $name, int $sell_in, Quality $quality) {
+    public function __construct(string $name, SellIn $sellIn, Quality $quality)
+    {
         $this->name = $name;
-        $this->sellIn = $sell_in;
+        $this->sellIn = $sellIn;
         $this->quality = $quality;
     }
-
 
     /**
      * @return string
@@ -37,27 +34,11 @@ function __construct(string $name, int $sell_in, Quality $quality) {
     }
 
     /**
-     * @param string $name
-     */
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
-    /**
      * @return int
      */
     public function getSellIn(): int
     {
-        return $this->sellIn;
-    }
-
-    /**
-     * @param int $sellIn
-     */
-    public function setSellIn(int $sellIn): void
-    {
-        $this->sellIn = $sellIn;
+        return $this->sellIn->toInt();
     }
 
     /**
@@ -66,6 +47,19 @@ function __construct(string $name, int $sell_in, Quality $quality) {
     public function getQuality(): int
     {
         return $this->quality->toInt();
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function sellInDecrease(): void
+    {
+        $this->sellIn->decrease();
     }
 
     public function qualityIncrase(): void
@@ -110,10 +104,34 @@ function __construct(string $name, int $sell_in, Quality $quality) {
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    public function __toString(): string {
-        return "{$this->name}, {$this->sellIn}, {$this->quality->toInt()}";
+    public function isSellInMinorToMaxValue(): bool
+    {
+        return $this->sellIn->isMinorToMaxValue();
     }
 
+    /**
+     * @return bool
+     */
+    public function isSellInMinorToMiddleValue(): bool
+    {
+        return $this->sellIn->isMinorToMiddleValue();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSellInMinorToMinValue(): bool
+    {
+        return $this->sellIn->isMinorToMinValue();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return "{$this->name}, {$this->sellIn->toInt()}, {$this->quality->toInt()}";
+    }
 }
