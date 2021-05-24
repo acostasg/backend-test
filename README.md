@@ -19,7 +19,12 @@ execute PHP-cs-fixer
 ```
 docker exec -ti backend-test_php_1 php vendor/bin/php-cs-fixer fix src
 ```
-__
+## Patterns Used
+
+* Command Pattern
+* Composite Patter
+* Factory Pattern
+* Decorator Pattern
 
 # Backend Developer Test
 

@@ -4,7 +4,6 @@ namespace Runroom\GildedRose\model;
 
 class Product extends AbstractItem
 {
-
     public function update(): void
     {
         if ($this->isQualityMajorByMinValue()) {

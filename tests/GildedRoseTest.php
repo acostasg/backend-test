@@ -5,6 +5,7 @@ namespace Runroom\GildedRose\Tests;
 use PHPUnit\Framework\TestCase;
 use Runroom\GildedRose\factory\ProductFactory;
 use Runroom\GildedRose\GildedRose;
+use Runroom\GildedRose\model\collection\ProductCollection;
 
 class GildedRoseTest extends TestCase
 {
@@ -13,12 +14,12 @@ class GildedRoseTest extends TestCase
      */
     public function itemsDegradeQuality(): void
     {
-        $items = [ProductFactory::build('', 1, 5)];
+        $items = new ProductCollection([ProductFactory::build('', 1, 5)]);
 
         $gilded_rose = new GildedRose($items);
         $gilded_rose->updateQuality();
 
-        $this->assertEquals(4, $items[0]->getQuality());
+        $this->assertEquals(4, $items->getProduct(0)->getQuality());
     }
 
     /**
@@ -26,12 +27,12 @@ class GildedRoseTest extends TestCase
      */
     public function itemsDegradeDoubleQualityOnceTheSellInDateHasPass(): void
     {
-        $items = [ProductFactory::build('', -1, 5)];
+        $items = new ProductCollection([ProductFactory::build('', -1, 5)]);
 
         $gilded_rose = new GildedRose($items);
         $gilded_rose->updateQuality();
 
-        $this->assertEquals(3, $items[0]->getQuality());
+        $this->assertEquals(3, $items->getProduct(0)->getQuality());
     }
 
     /**
@@ -39,12 +40,12 @@ class GildedRoseTest extends TestCase
      */
     public function itemsCannotHaveNegativeQuality(): void
     {
-        $items = [ProductFactory::build('', 0, 0)];
+        $items = new ProductCollection([ProductFactory::build('', 0, 0)]);
 
         $gilded_rose = new GildedRose($items);
         $gilded_rose->updateQuality();
 
-        $this->assertEquals(0, $items[0]->getQuality());
+        $this->assertEquals(0, $items->getProduct(0)->getQuality());
     }
 
     /**
@@ -52,12 +53,12 @@ class GildedRoseTest extends TestCase
      */
     public function agedBrieIncreasesQualityOverTime(): void
     {
-        $items = [ProductFactory::build('Aged Brie', 0, 5)];
+        $items = new ProductCollection([ProductFactory::build('Aged Brie', 0, 5)]);
 
         $gilded_rose = new GildedRose($items);
         $gilded_rose->updateQuality();
 
-        $this->assertEquals(7, $items[0]->getQuality());
+        $this->assertEquals(7, $items->getProduct(0)->getQuality());
     }
 
     /**
@@ -65,12 +66,12 @@ class GildedRoseTest extends TestCase
      */
     public function qualityCannotBeGreaterThan50(): void
     {
-        $items = [ProductFactory::build('Aged Brie', 0, 50)];
+        $items = new ProductCollection([ProductFactory::build('Aged Brie', 0, 50)]);
 
         $gilded_rose = new GildedRose($items);
         $gilded_rose->updateQuality();
 
-        $this->assertEquals(50, $items[0]->getQuality());
+        $this->assertEquals(50, $items->getProduct(0)->getQuality());
     }
 
     /**
@@ -78,15 +79,18 @@ class GildedRoseTest extends TestCase
      */
     public function sulfurasDoesNotChange(): void
     {
-        $items = [ProductFactory::build('Sulfuras, Hand of Ragnaros', 10, 10)];
+        $items = new ProductCollection([ProductFactory::build('Sulfuras, Hand of Ragnaros', 10, 10)]);
 
         $gilded_rose = new GildedRose($items);
         $gilded_rose->updateQuality();
 
-        $this->assertEquals(10, $items[0]->getSellIn());
-        $this->assertEquals(10, $items[0]->getQuality());
+        $this->assertEquals(10, $items->getProduct(0)->getSellIn());
+        $this->assertEquals(10, $items->getProduct(0)->getQuality());
     }
 
+    /**
+     * @return int[][]
+     */
     public static function backstageRules(): array
     {
         return [
@@ -106,11 +110,11 @@ class GildedRoseTest extends TestCase
      */
     public function backstageQualityIncreaseOverTimeWithCertainRules(int $sellIn, int $quality, int $expected): void
     {
-        $items = [ProductFactory::build('Backstage passes to a TAFKAL80ETC concert', $sellIn, $quality)];
+        $items = new ProductCollection([ProductFactory::build('Backstage passes to a TAFKAL80ETC concert', $sellIn, $quality)]);
 
         $gilded_rose = new GildedRose($items);
         $gilded_rose->updateQuality();
 
-        $this->assertEquals($expected, $items[0]->getQuality());
+        $this->assertEquals($expected, $items->getProduct(0)->getQuality());
     }
 }
