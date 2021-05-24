@@ -3,7 +3,6 @@
 
 namespace Runroom\GildedRose\model;
 
-
 class TypeItem
 {
     const AGED_BRIE = 'Aged Brie';

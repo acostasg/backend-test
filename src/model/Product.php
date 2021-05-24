@@ -2,7 +2,7 @@
 
 namespace Runroom\GildedRose\model;
 
-class Item
+class Product
 {
 
     /** @var string */
@@ -47,14 +47,6 @@ class Item
     public function getQuality(): int
     {
         return $this->quality->toInt();
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName(string $name): void
-    {
-        $this->name = $name;
     }
 
     public function sellInDecrease(): void
@@ -132,6 +124,6 @@ class Item
      */
     public function __toString(): string
     {
-        return "{$this->name}, {$this->sellIn->toInt()}, {$this->quality->toInt()}";
+        return "{$this->name}, {$this->sellIn}, {$this->quality}";
     }
 }

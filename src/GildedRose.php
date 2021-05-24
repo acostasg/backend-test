@@ -2,12 +2,12 @@
 
 namespace Runroom\GildedRose;
 
-use Runroom\GildedRose\model\Item;
+use Runroom\GildedRose\model\Product;
 use Runroom\GildedRose\model\TypeItem;
 
 class GildedRose
 {
-    /* @var item[] */
+    /* @var Product[] */
     private array $items;
 
     /**
@@ -16,7 +16,7 @@ class GildedRose
      */
     public function __construct(array $items)
     {
-        $this->items = $items;hh
+        $this->items = $items;
     }
 
     public function update_quality(): void

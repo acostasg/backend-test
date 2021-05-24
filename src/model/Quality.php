@@ -88,4 +88,12 @@ class Quality
     {
         return ($this->quality < self::MAX_QUALITY);
     }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return (string)$this->toInt();
+    }
 }

@@ -56,4 +56,12 @@ class SellIn
     {
         return ($this->days < self::MIN_SELL_IN);
     }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return (string)$this->toInt();
+    }
 }
